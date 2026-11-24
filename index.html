@@ -7,7 +7,8 @@
 <style>
   :root{
     --bg:#FAF7F2; --card:#fff; --text:#2C2C2C; --soft:#6B6B6B;
-    --green:#6B7F6B; --terra:#C89B7B; --line:#E8E2D5; --gold:#D4A574;
+    --green:#6B7F6B; --terra:#C89B7B; --line:#E8E2D5;
+    --pink:#F2D4D4; --pink-soft:#F9E8E8; --pink-deep:#D4A0A0;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding-bottom:82px}
@@ -21,15 +22,15 @@
   .screen.active{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem;margin-bottom:.9rem;box-shadow:0 2px 10px rgba(0,0,0,.04)}
-  .btn{display:inline-block;background:var(--green);color:#fff;text-decoration:none;padding:.55rem 1rem;border-radius:10px;font-size:.85rem;margin:.25rem .3rem .25rem 0;border:none;cursor:pointer;transition:transform .15s}
+  .btn{display:inline-block;background:var(--green);color:#fff;text-decoration:none;padding:.5rem .9rem;border-radius:10px;font-size:.82rem;margin:.2rem .2rem .2rem 0;border:none;cursor:pointer}
   .btn.terra{background:var(--terra)}
-  .btn.gold{background:var(--gold)}
+  .btn.pink{background:var(--pink-deep)}
   .btn:active{transform:scale(.95)}
   .row{display:flex;align-items:center;gap:.6rem;padding:.5rem 0;border-bottom:1px dashed var(--line)}
   .row:last-child{border-bottom:none}
   .row label{flex:1;font-size:.95rem}
   input[type=checkbox]{width:22px;height:22px;accent-color:var(--green);cursor:pointer}
-  input[type=text],textarea{width:100%;padding:.7rem;border:1px solid var(--line);border-radius:10px;font:inherit;background:#FDFBF6;font-size:.95rem}
+  input[type=text],input[type=password],textarea{width:100%;padding:.7rem;border:1px solid var(--line);border-radius:10px;font:inherit;background:#FDFBF6;font-size:.95rem;margin-bottom:.5rem}
   textarea{min-height:120px;resize:vertical}
   details{background:#FDFBF6;border-left:3px solid var(--green);padding:.7rem .9rem;margin-bottom:.6rem;border-radius:0 10px 10px 0}
   details summary{cursor:pointer;font-weight:600;color:var(--green);font-size:.95rem}
@@ -44,29 +45,62 @@
   .book-item h3{margin:0 0 .2rem 0;color:var(--text);font-size:1.05rem}
   .book-item .author{color:var(--green);font-size:.85rem;margin-bottom:.4rem}
   .book-item p{font-size:.88rem;color:var(--soft);margin-bottom:.5rem}
-  .resource-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem;margin-bottom:.7rem}
-  .resource-card h3{margin:0 0 .3rem 0;color:var(--text);font-size:1rem}
-  .resource-card p{font-size:.88rem;color:var(--soft);margin-bottom:.5rem}
-  /* XP bar */
+  /* Ресурсы в виде таблицы-сетки 2 в ряд */
+  .res-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--line);margin-bottom:1rem}
+  .res-table th{background:var(--green);color:#fff;padding:.6rem;text-align:left;font-size:.82rem}
+  .res-table td{padding:.6rem;border-bottom:1px solid var(--line);font-size:.88rem;vertical-align:top}
+  .res-table tr:last-child td{border-bottom:none}
+  .res-table .btn{font-size:.75rem;padding:.3rem .6rem;margin:.1rem}
+  .res-table .two-links{display:flex;gap:.3rem;flex-wrap:wrap}
+  /* План таблица */
+  .plan-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--line);margin-bottom:1rem}
+  .plan-table th{background:var(--green);color:#fff;padding:.6rem;text-align:left;font-size:.82rem}
+  .plan-table td{padding:.6rem;border-bottom:1px solid var(--line);font-size:.85rem;vertical-align:top}
+  .plan-table tr:last-child td{border-bottom:none}
+  .plan-table tr.done{background:var(--pink-soft)}
+  .plan-table input[type=checkbox]{width:20px;height:20px}
+  /* Декоративные SVG цветы */
+  .deco{position:absolute;pointer-events:none;opacity:.5}
+  .deco-flower{width:70px;height:70px}
+  .screen-wrap{position:relative}
+  /* Login */
+  #login-screen{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center}
+  #login-screen h1{margin-bottom:.5rem}
+  #login-screen input{max-width:280px}
+  #login-screen .btn{margin-top:.5rem}
+  #login-screen .hint{font-size:.8rem;color:var(--soft);margin-top:1rem;max-width:280px}
+  /* XP */
   .xp-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.9rem;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem}
   .xp-info{flex:1}
   .xp-info .lvl{font-weight:700;color:var(--green);font-size:1.1rem}
   .xp-info .xp-text{font-size:.8rem;color:var(--soft)}
   .xp-bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden;margin-top:.4rem}
   .xp-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--terra));transition:width .5s}
-  /* confetti */
-  .confetti{position:fixed;top:-20px;width:10px;height:10px;border-radius:50%;pointer-events:none;z-index:9999;animation:fall 2.5s linear forwards}
+  /* Конфетти */
+  .confetti{position:fixed;top:-20px;pointer-events:none;z-index:9999;animation:fall 2.5s linear forwards}
   @keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
-  /* bottom nav */
+  /* Навигация */
   nav{position:fixed;bottom:0;left:0;right:0;z-index:60;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:.4rem 0 .6rem}
-  nav button{background:none;border:none;font:inherit;color:var(--soft);display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.62rem;cursor:pointer;padding:.2rem .4rem;border-radius:10px}
-  nav button .ico{font-size:1.3rem}
+  nav button{background:none;border:none;font:inherit;color:var(--soft);display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.58rem;cursor:pointer;padding:.2rem .2rem;border-radius:10px}
+  nav button .ico{font-size:1.15rem}
   nav button.active{color:var(--green);font-weight:600}
   .challenge{background:linear-gradient(135deg,#FDFBF6,#FAF7F2);border:1px dashed var(--terra);border-radius:12px;padding:.9rem;margin-bottom:.7rem}
   .challenge .tag{display:inline-block;background:var(--terra);color:#fff;padding:.15rem .5rem;border-radius:6px;font-size:.7rem;margin-bottom:.4rem}
+  .sync-box{background:var(--pink-soft);border:1px solid var(--pink);border-radius:12px;padding:.9rem;margin-bottom:1rem}
+  .sync-box h3{color:var(--pink-deep);margin-bottom:.5rem;font-size:1rem}
+  .sync-box .btn{margin-right:.3rem}
 </style>
 </head>
 <body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <h1>🧠 Cognitive Lab</h1>
+  <p class="muted" style="margin-bottom:1rem">Введи свой пароль</p>
+  <input type="password" id="login-pass" placeholder="Пароль">
+  <button class="btn" onclick="doLogin()">Войти</button>
+  <p class="hint" id="login-hint">Первый раз? Придумай пароль и нажми "Войти". Он хранится только на твоём устройстве.</p>
+</div>
 
 <div class="topbar"><b>Cognitive Lab · 2026</b>Моя лаборатория мозга</div>
 
@@ -74,9 +108,20 @@
 
   <!-- ГЛАВНАЯ -->
   <section class="screen active" id="home">
-    <h1>Привет 👋</h1>
-    <p class="muted">Твоё приложение для изучения когнитивной психологии и саморазвития. Всё сохраняется автоматически.</p>
-    
+    <div class="screen-wrap">
+      <svg class="deco deco-flower" style="top:-10px;right:-10px" viewBox="0 0 70 70">
+        <circle cx="35" cy="35" r="8" fill="#F2D4D4"/>
+        <circle cx="35" cy="18" r="7" fill="#F9E8E8"/>
+        <circle cx="35" cy="52" r="7" fill="#F9E8E8"/>
+        <circle cx="18" cy="35" r="7" fill="#F9E8E8"/>
+        <circle cx="52" cy="35" r="7" fill="#F9E8E8"/>
+        <circle cx="23" cy="23" r="5" fill="#F2D4D4"/>
+        <circle cx="47" cy="47" r="5" fill="#F2D4D4"/>
+      </svg>
+      <h1>Привет 👋</h1>
+    </div>
+    <p class="muted">Твоё приложение для изучения когнитивной психологии.</p>
+
     <div class="xp-wrap">
       <div class="xp-info">
         <div class="lvl">Уровень <span id="lvl-num">1</span> · <span id="lvl-title">Новичок</span></div>
@@ -99,13 +144,28 @@
       <div class="row"><label>Записать инсайт в дневник</label><input type="checkbox" data-key="s5" data-xp="10"></div>
     </div>
 
+    <div class="sync-box">
+      <h3>🔄 Синхронизация между устройствами</h3>
+      <p class="muted" style="margin-bottom:.6rem">Скачай данные на одном устройстве и загрузи на другом.</p>
+      <button class="btn pink" onclick="exportData()">📥 Скачать данные</button>
+      <button class="btn pink" onclick="document.getElementById('import-file').click()">📤 Загрузить данные</button>
+      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
+    </div>
+
     <div class="quote">«Мы не видим вещи такими, какие они есть. Мы видим их такими, какие мы есть.» — Анаис Нин</div>
   </section>
 
   <!-- КНИГИ -->
   <section class="screen" id="books">
-    <h1>📚 Библиотека</h1>
-    <p class="muted">Ссылки ведут на сервисы, где можно сразу читать (Литрес, Яндекс.Книги, MyBook).</p>
+    <div class="screen-wrap">
+      <svg class="deco deco-flower" style="top:-10px;left:-10px" viewBox="0 0 70 70">
+        <path d="M35 12 Q45 22 35 35 Q25 22 35 12" fill="#F2D4D4"/>
+        <path d="M35 35 Q45 48 35 58 Q25 48 35 35" fill="#F9E8E8"/>
+        <circle cx="35" cy="35" r="4" fill="#D4A0A0"/>
+      </svg>
+      <h1>📚 Библиотека</h1>
+    </div>
+    <p class="muted">Ссылки на Яндекс.Книги и MyBook — там можно сразу читать.</p>
 
     <div class="section-title">🧠 Когнитивная психология</div>
 
@@ -113,8 +173,8 @@
       <h3>Выдающийся ум</h3>
       <div class="author">Мария Конникова</div>
       <p>Как думать как Шерлок Холмс: наблюдательность, внимание, «мозговой чердак». Идеально для старта.</p>
-      <a class="btn" href="https://www.litres.ru/book/mariya-konnikova/vydayuschiysya-um-67740301/" target="_blank">Литрес</a>
-      <a class="btn terra" href="https://yandex.ru/search/?text=Выдающийся+ум+Конникова+Яндекс+Книги" target="_blank">Яндекс.Книги</a>
+      <a class="btn" href="https://yandex.ru/search/?text=Выдающийся+ум+Конникова+Яндекс+Книги" target="_blank">Яндекс.Книги</a>
+      <a class="btn terra" href="https://www.mybook.ru/search/?q=Выдающийся+ум+Конникова" target="_blank">MyBook</a>
       <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk1" data-xp="20"></div>
     </div>
 
@@ -122,8 +182,8 @@
       <h3>Думай медленно… решай быстро</h3>
       <div class="author">Даниэль Канеман</div>
       <p>Библия когнитивной психологии. Система 1 и 2, когнитивные искажения. Нобелевский лауреат.</p>
-      <a class="btn" href="https://www.litres.ru/book/daniel-kaneman/dumay-medlenno-reshay-bystro-11196482/" target="_blank">Литрес</a>
-      <a class="btn terra" href="https://www.mybook.ru/author/daniel-kaneman/dumay-medlenno-reshaj-bystro/" target="_blank">MyBook</a>
+      <a class="btn" href="https://yandex.ru/search/?text=Думай+медленно+решай+быстро+Канеман+Яндекс+Книги" target="_blank">Яндекс.Книги</a>
+      <a class="btn terra" href="https://www.mybook.ru/search/?q=Думай+медленно+решай+быстро" target="_blank">MyBook</a>
       <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk2" data-xp="20"></div>
     </div>
 
@@ -131,7 +191,8 @@
       <h3>Психология влияния</h3>
       <div class="author">Роберт Чалдини</div>
       <p>6 принципов убеждения — must-have для понимания маркетинга и твоего будущего бренда.</p>
-      <a class="btn" href="https://www.litres.ru/book/robert-chaldini/psihologiya-vliyaniya-11196471/" target="_blank">Литрес</a>
+      <a class="btn" href="https://yandex.ru/search/?text=Психология+влияния+Чалдини+Яндекс+Книги" target="_blank">Яндекс.Книги</a>
+      <a class="btn terra" href="https://www.mybook.ru/search/?q=Психология+влияния+Чалдини" target="_blank">MyBook</a>
       <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk3" data-xp="20"></div>
     </div>
 
@@ -139,7 +200,8 @@
       <h3>В интернете кто-то неправ!</h3>
       <div class="author">Ася Казанцева</div>
       <p>Мифы о мозге, еде и привычках. Легко, смешно, быстро читается.</p>
-      <a class="btn" href="https://www.litres.ru/book/asya-kazanceva/v-internete-kto-to-neprav-11196462/" target="_blank">Литрес</a>
+      <a class="btn" href="https://yandex.ru/search/?text=В+интернете+кто-то+неправ+Казанцева+Яндекс+Книги" target="_blank">Яндекс.Книги</a>
+      <a class="btn terra" href="https://www.mybook.ru/search/?q=В+интернете+кто-то+неправ" target="_blank">MyBook</a>
       <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk4" data-xp="20"></div>
     </div>
 
@@ -149,8 +211,8 @@
       <h3>Короли речи</h3>
       <div class="author">Ларри Кинг</div>
       <p>Как говорить с кем угодно, когда угодно и где угодно. Классика по развитию речи и уверенности.</p>
-      <a class="btn" href="https://www.litres.ru/book/larri-king/koroli-rechi-11196453/" target="_blank">Литрес</a>
-      <a class="btn terra" href="https://www.mybook.ru/author/larri-king/koroli-rechi/" target="_blank">MyBook</a>
+      <a class="btn" href="https://yandex.ru/search/?text=Короли+речи+Ларри+Кинг+Яндекс+Книги" target="_blank">Яндекс.Книги</a>
+      <a class="btn terra" href="https://www.mybook.ru/search/?q=Короли+речи+Ларри+Кинг" target="_blank">MyBook</a>
       <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk5" data-xp="20"></div>
     </div>
 
@@ -158,39 +220,59 @@
       <h3>Харизма. Как влиять, убеждать и вдохновлять</h3>
       <div class="author">Оливия Фокс Кабейн</div>
       <p>Научный подход к харизме: присутствие, сила, теплота. Разбирается по компонентам.</p>
-      <a class="btn" href="https://www.litres.ru/book/oliviya-foks-kabeyn/harizma-kak-vliyat-ubezhdat-i-vdohnovlyat-11196444/" target="_blank">Литрес</a>
+      <a class="btn" href="https://yandex.ru/search/?text=Харизма+Оливия+Фокс+Кабейн+Яндекс+Книги" target="_blank">Яндекс.Книги</a>
+      <a class="btn terra" href="https://www.mybook.ru/search/?q=Харизма+Оливия+Фокс" target="_blank">MyBook</a>
       <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk6" data-xp="20"></div>
-    </div>
-
-    <div class="book-item">
-      <h3>Сила слова</h3>
-      <div class="author">Джеймс Берг</div>
-      <p>Техники развития дикции, голоса и ораторского мастерства. Упражнения на каждый день.</p>
-      <a class="btn" href="https://www.litres.ru/genre/samorazvitie/?q=дикция+голос" target="_blank">Литрес (подборка)</a>
-      <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk7" data-xp="20"></div>
     </div>
 
     <div class="book-item">
       <h3>Гибкое сознание</h3>
       <div class="author">Кэрол Дуэк</div>
       <p>Про mindset роста — почему одни сдаются, а другие растут. Основа для любого развития.</p>
-      <a class="btn" href="https://www.litres.ru/book/kerol-duek/gibkoe-soznanie-11196435/" target="_blank">Литрес</a>
-      <a class="btn terra" href="https://www.mybook.ru/author/kerol-duek/gibkoe-soznanie/" target="_blank">MyBook</a>
-      <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk8" data-xp="20"></div>
+      <a class="btn" href="https://yandex.ru/search/?text=Гибкое+сознание+Кэрол+Дуэк+Яндекс+Книги" target="_blank">Яндекс.Книги</a>
+      <a class="btn terra" href="https://www.mybook.ru/search/?q=Гибкое+сознание+Дуэк" target="_blank">MyBook</a>
+      <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk7" data-xp="20"></div>
     </div>
 
     <div class="book-item">
       <h3>Атомные привычки</h3>
       <div class="author">Джеймс Клир</div>
       <p>Как выстраивать хорошие привычки и избавляться от плохих. Маленькие шаги — большие результаты.</p>
-      <a class="btn" href="https://www.litres.ru/book/dzhems-klir/atomnye-privychki-11196426/" target="_blank">Литрес</a>
-      <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk9" data-xp="20"></div>
+      <a class="btn" href="https://yandex.ru/search/?text=Атомные+привычки+Джеймс+Клир+Яндекс+Книги" target="_blank">Яндекс.Книги</a>
+      <a class="btn terra" href="https://www.mybook.ru/search/?q=Атомные+привычки" target="_blank">MyBook</a>
+      <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk8" data-xp="20"></div>
+    </div>
+
+    <div class="section-title">📖 Краткие содержания (Book Summaries)</div>
+    <div class="book-item">
+      <h3>GetAbstract (рус.)</h3>
+      <p>Краткие содержания бизнес- и психологических книг. Можно читать выжимки вместо целых книг.</p>
+      <a class="btn" href="https://www.getabstract.com/ru/" target="_blank">Открыть</a>
+    </div>
+    <div class="book-item">
+      <h3>Blinkist (англ.)</h3>
+      <p>15-минутные выжимки из нон-фикшн книг. Отлично для английского.</p>
+      <a class="btn" href="https://www.blinkist.com" target="_blank">Открыть</a>
+    </div>
+    <div class="book-item">
+      <h3>Storytel (рус.)</h3>
+      <p>Аудиокниги + краткие содержания. Слушай по дороге в школу.</p>
+      <a class="btn" href="https://www.storytel.com/ru/ru/" target="_blank">Открыть</a>
     </div>
   </section>
 
   <!-- ТЕОРИЯ -->
   <section class="screen" id="theory">
-    <h1>🧠 Теория</h1>
+    <div class="screen-wrap">
+      <svg class="deco deco-flower" style="top:-10px;right:-10px" viewBox="0 0 70 70">
+        <circle cx="35" cy="35" r="8" fill="#F2D4D4"/>
+        <circle cx="35" cy="18" r="7" fill="#F9E8E8"/>
+        <circle cx="35" cy="52" r="7" fill="#F9E8E8"/>
+        <circle cx="18" cy="35" r="7" fill="#F9E8E8"/>
+        <circle cx="52" cy="35" r="7" fill="#F9E8E8"/>
+      </svg>
+      <h1>🧠 Теория</h1>
+    </div>
     <p class="muted">Раскрывай блоки и ищи термины через поиск.</p>
     <input type="text" id="search" placeholder="🔍 Поиск термина…">
 
@@ -236,7 +318,14 @@
 
   <!-- ПРАКТИКА -->
   <section class="screen" id="practice">
-    <h1>🧪 Практика</h1>
+    <div class="screen-wrap">
+      <svg class="deco deco-flower" style="top:-10px;left:-10px" viewBox="0 0 70 70">
+        <path d="M35 12 Q45 22 35 35 Q25 22 35 12" fill="#F2D4D4"/>
+        <path d="M35 35 Q45 48 35 58 Q25 48 35 35" fill="#F9E8E8"/>
+        <circle cx="35" cy="35" r="4" fill="#D4A0A0"/>
+      </svg>
+      <h1>🧪 Практика</h1>
+    </div>
 
     <h2>🌱 Мои привычки</h2>
     <div class="card">
@@ -262,21 +351,39 @@
     <h2>🎯 Челленджи недели</h2>
     <div class="challenge">
       <span class="tag">Челлендж</span>
-      <h3>25 минут Pomodoro без телефона</h3>
+      <h3>🍅 Pomodoro без телефона</h3>
       <p class="muted">Поставь таймер на 25 минут. Телефон — в другую комнату. Запиши, сколько раз потянулся к нему.</p>
       <div class="row"><label>Выполнено</label><input type="checkbox" data-key="c1" data-xp="20"></div>
     </div>
     <div class="challenge">
       <span class="tag">Челлендж</span>
-      <h3>Поймать 3 искажения у себя</h3>
+      <h3>🕵️ Поймать 3 искажения у себя</h3>
       <p class="muted">В течение дня замечай моменты, когда твой мозг «срезает угол». Запиши в дневник.</p>
       <div class="row"><label>Выполнено</label><input type="checkbox" data-key="c2" data-xp="25"></div>
     </div>
     <div class="challenge">
       <span class="tag">Челлендж</span>
-      <h3>Проанализировать 1 бренд</h3>
-      <p class="muted">Выбери любимый бренд одежды. Найди 3 когнитивных приёма, которые он использует.</p>
+      <h3>👗 Разобрать бренд Zara</h3>
+      <p class="muted">Найди 3 когнитивных приёма, которые использует Zara (дефицит, социальное доказательство, якорь цены).</p>
       <div class="row"><label>Выполнено</label><input type="checkbox" data-key="c3" data-xp="30"></div>
+    </div>
+    <div class="challenge">
+      <span class="tag">Челлендж</span>
+      <h3>🗣️ Записать голос на диктофон</h3>
+      <p class="muted">Прочитай вслух 1 страницу книги. Послушай запись. Найди 3 слова-паразита.</p>
+      <div class="row"><label>Выполнено</label><input type="checkbox" data-key="c4" data-xp="20"></div>
+    </div>
+    <div class="challenge">
+      <span class="tag">Челлендж</span>
+      <h3>👀 Наблюдение в кафе</h3>
+      <p class="muted">Посиди 15 минут в людном месте. Запиши 5 паттернов поведения незнакомцев.</p>
+      <div class="row"><label>Выполнено</label><input type="checkbox" data-key="c5" data-xp="25"></div>
+    </div>
+    <div class="challenge">
+      <span class="tag">Челлендж</span>
+      <h3>🎨 Мудборд будущего бренда</h3>
+      <p class="muted">Собери в Pinterest или на бумаге 10 картинок, которые отражают стиль твоего будущего бренда. Объясни выбор через гештальт-принципы.</p>
+      <div class="row"><label>Выполнено</label><input type="checkbox" data-key="c6" data-xp="30"></div>
     </div>
 
     <h2>📓 Дневник мозга</h2>
@@ -284,35 +391,122 @@
     <textarea data-key="journal" placeholder="Сегодня я заметила, что человек…"></textarea>
   </section>
 
-  <!-- РЕСУРСЫ -->
+  <!-- РЕСУРСЫ (в виде таблицы) -->
   <section class="screen" id="resources">
-    <h1>🔗 Ресурсы</h1>
-    <p class="muted">Всё разделено по категориям. Тапай — откроется в браузере.</p>
+    <div class="screen-wrap">
+      <svg class="deco deco-flower" style="top:-10px;right:-10px" viewBox="0 0 70 70">
+        <circle cx="35" cy="35" r="8" fill="#F2D4D4"/>
+        <circle cx="35" cy="18" r="7" fill="#F9E8E8"/>
+        <circle cx="35" cy="52" r="7" fill="#F9E8E8"/>
+        <circle cx="18" cy="35" r="7" fill="#F9E8E8"/>
+        <circle cx="52" cy="35" r="7" fill="#F9E8E8"/>
+      </svg>
+      <h1>🔗 Ресурсы</h1>
+    </div>
+    <p class="muted">Всё в таблицах. Выбирай платформу: YouTube или ВК.</p>
 
     <div class="section-title">📺 Видео</div>
-    <div class="resource-card"><h3>Utopia Show</h3><p>Разборы мифов о мозге, психологии и поведении.</p><a class="btn" href="https://www.youtube.com/@utopiashow" target="_blank">YouTube</a></div>
-    <div class="resource-card"><h3>Toples</h3><p>Научпоп-разборы психологических экспериментов.</p><a class="btn" href="https://www.youtube.com/@ToplessTopor" target="_blank">YouTube</a></div>
-    <div class="resource-card"><h3>Kurzgesagt (англ.)</h3><p>Красивые анимации про мозг, привычки, сознание.</p><a class="btn" href="https://www.youtube.com/@kurzgesagt" target="_blank">YouTube</a></div>
-    <div class="resource-card"><h3>Лекции ВШЭ по психологии</h3><p>Настоящие университетские лекции на русском.</p><a class="btn" href="https://www.youtube.com/results?search_query=лекции+ВШЭ+когнитивная+психология" target="_blank">YouTube</a></div>
+    <table class="res-table">
+      <thead><tr><th>Канал</th><th>О чём</th><th>Ссылки</th></tr></thead>
+      <tbody>
+        <tr><td><b>Utopia Show</b></td><td>Мифы о мозге и психологии</td><td><div class="two-links"><a class="btn" href="https://www.youtube.com/@utopiashow" target="_blank">YouTube</a><a class="btn terra" href="https://vk.com/video/@utopiashow" target="_blank">ВК</a></div></td></tr>
+        <tr><td><b>Toples</b></td><td>Психологические эксперименты</td><td><div class="two-links"><a class="btn" href="https://www.youtube.com/@ToplessTopor" target="_blank">YouTube</a><a class="btn terra" href="https://vk.com/video/@toples" target="_blank">ВК</a></div></td></tr>
+        <tr><td><b>Kurzgesagt</b></td><td>Анимации про мозг (англ.)</td><td><div class="two-links"><a class="btn" href="https://www.youtube.com/@kurzgesagt" target="_blank">YouTube</a><a class="btn terra" href="https://vk.com/video?q=Kurzgesagt+мозг" target="_blank">ВК</a></div></td></tr>
+        <tr><td><b>Huberman Lab</b></td><td>Нейробиология Стэнфорда</td><td><div class="two-links"><a class="btn" href="https://www.youtube.com/@hubermanlab" target="_blank">YouTube</a><a class="btn terra" href="https://vk.com/video?q=Huberman+Lab" target="_blank">ВК</a></div></td></tr>
+        <tr><td><b>Лекции ВШЭ</b></td><td>Университетские лекции</td><td><div class="two-links"><a class="btn" href="https://www.youtube.com/results?search_query=лекции+ВШЭ+когнитивная+психология" target="_blank">YouTube</a><a class="btn terra" href="https://vk.com/video?q=лекции+ВШЭ+психология" target="_blank">ВК</a></div></td></tr>
+        <tr><td><b>TED Talks</b></td><td>Короткие выступления</td><td><div class="two-links"><a class="btn" href="https://www.youtube.com/results?search_query=TED+cognitive+psychology" target="_blank">YouTube</a><a class="btn terra" href="https://vk.com/video?q=TED+психология" target="_blank">ВК</a></div></td></tr>
+      </tbody>
+    </table>
 
     <div class="section-title">🎧 Подкасты</div>
-    <div class="resource-card"><h3>Психология на Дожде</h3><p>Русскоязычный подкаст о психологии простым языком.</p><a class="btn" href="https://music.yandex.ru/album/10737877" target="_blank">Яндекс.Музыка</a></div>
-    <div class="resource-card"><h3>Huberman Lab (англ.)</h3><p>Нейробиолог Стэнфорда разбирает работу мозга.</p><a class="btn" href="https://www.youtube.com/@hubermanlab" target="_blank">YouTube</a></div>
+    <table class="res-table">
+      <thead><tr><th>Название</th><th>О чём</th><th>Ссылки</th></tr></thead>
+      <tbody>
+        <tr><td><b>Психология на Дожде</b></td><td>Русскоязычный подкаст о психологии</td><td><div class="two-links"><a class="btn" href="https://music.yandex.ru/album/10737877" target="_blank">Яндекс</a><a class="btn terra" href="https://vk.com/podcast?q=психология+на+дожде" target="_blank">ВК</a></div></td></tr>
+        <tr><td><b>Huberman Lab</b></td><td>Нейробиология (англ.)</td><td><div class="two-links"><a class="btn" href="https://www.youtube.com/@hubermanlab" target="_blank">YouTube</a><a class="btn terra" href="https://vk.com/podcast?q=Huberman" target="_blank">ВК</a></div></td></tr>
+        <tr><td><b>ПостНаука</b></td><td>Короткие лекции учёных</td><td><div class="two-links"><a class="btn" href="https://postnauka.ru/audio" target="_blank">Сайт</a><a class="btn terra" href="https://vk.com/postnauka" target="_blank">ВК</a></div></td></tr>
+      </tbody>
+    </table>
 
-    <div class="section-title">📰 Статьи и лекции</div>
-    <div class="resource-card"><h3>PostNauka</h3><p>Короткие лекции от учёных ВШЭ и МГУ.</p><a class="btn" href="https://postnauka.ru/themes/psychology" target="_blank">Открыть</a></div>
-    <div class="resource-card"><h3>Simply Psychology</h3><p>Статьи на простом английском — заодно язык качаешь.</p><a class="btn" href="https://www.simplypsychology.org" target="_blank">Открыть</a></div>
-    <div class="resource-card"><h3>Arzamas</h3><p>Курсы о культуре, мышлении, восприятии.</p><a class="btn" href="https://arzamas.academy" target="_blank">Открыть</a></div>
-    <div class="resource-card"><h3>КиберЛенинка</h3><p>Научные статьи бесплатно. Для глубокого погружения.</p><a class="btn" href="https://cyberleninka.ru" target="_blank">Открыть</a></div>
+    <div class="section-title">📰 Сайты и лекции</div>
+    <table class="res-table">
+      <thead><tr><th>Сайт</th><th>О чём</th><th>Ссылки</th></tr></thead>
+      <tbody>
+        <tr><td><b>PostNauka</b></td><td>Лекции ВШЭ и МГУ</td><td><a class="btn" href="https://postnauka.ru/themes/psychology" target="_blank">Открыть</a></td></tr>
+        <tr><td><b>Simply Psychology</b></td><td>Статьи на простом английском</td><td><a class="btn" href="https://www.simplypsychology.org" target="_blank">Открыть</a></td></tr>
+        <tr><td><b>Arzamas</b></td><td>Культура и мышление</td><td><a class="btn" href="https://arzamas.academy" target="_blank">Открыть</a></td></tr>
+        <tr><td><b>КиберЛенинка</b></td><td>Научные статьи бесплатно</td><td><a class="btn" href="https://cyberleninka.ru" target="_blank">Открыть</a></td></tr>
+      </tbody>
+    </table>
 
     <div class="section-title">🃏 Карточки и запоминание</div>
-    <div class="resource-card"><h3>Quizlet</h3><p>Готовые карточки по психологии + свои колоды.</p><a class="btn" href="https://quizlet.com" target="_blank">Открыть</a></div>
-    <div class="resource-card"><h3>Anki</h3><p>Мощнее Quizlet, с интервальными повторениями.</p><a class="btn" href="https://apps.ankiweb.net" target="_blank">Открыть</a></div>
+    <table class="res-table">
+      <thead><tr><th>Сервис</th><th>О чём</th><th>Ссылки</th></tr></thead>
+      <tbody>
+        <tr><td><b>Quizlet</b></td><td>Готовые колоды + свои</td><td><a class="btn" href="https://quizlet.com" target="_blank">Открыть</a></td></tr>
+        <tr><td><b>Anki</b></td><td>Интервальные повторения</td><td><a class="btn" href="https://apps.ankiweb.net" target="_blank">Открыть</a></td></tr>
+      </tbody>
+    </table>
 
     <div class="section-title">🎓 Курсы</div>
-    <div class="resource-card"><h3>Intro to Psychology (Yale)</h3><p>Бесплатный курс на Coursera от Йельского университета.</p><a class="btn" href="https://www.coursera.org/learn/introduction-psych" target="_blank">Coursera</a></div>
-    <div class="resource-card"><h3>Когнитивная психология (ВШЭ)</h3><p>Русскоязычный курс на Stepik.</p><a class="btn" href="https://stepik.org/catalog?q=когнитивная+психология" target="_blank">Stepik</a></div>
-    <div class="resource-card"><h3>Learning How to Learn</h3><p>Курс про то, как учиться. Самый популярный на Coursera.</p><a class="btn" href="https://www.coursera.org/learn/learning-how-to-learn" target="_blank">Coursera</a></div>
+    <table class="res-table">
+      <thead><tr><th>Курс</th><th>О чём</th><th>Ссылки</th></tr></thead>
+      <tbody>
+        <tr><td><b>Intro to Psychology</b></td><td>Yale, Coursera (англ.)</td><td><a class="btn" href="https://www.coursera.org/learn/introduction-psych" target="_blank">Открыть</a></td></tr>
+        <tr><td><b>Learning How to Learn</b></td><td>Как учиться эффективно</td><td><a class="btn" href="https://www.coursera.org/learn/learning-how-to-learn" target="_blank">Открыть</a></td></tr>
+        <tr><td><b>Когнитивная психология</b></td><td>ВШЭ, Stepik (рус.)</td><td><a class="btn" href="https://stepik.org/catalog?q=когнитивная+психология" target="_blank">Открыть</a></td></tr>
+        <tr><td><b>Психология влияния</b></td><td>По Чалдини</td><td><a class="btn" href="https://stepik.org/catalog?q=психология+влияния" target="_blank">Открыть</a></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ПЛАН -->
+  <section class="screen" id="plan">
+    <div class="screen-wrap">
+      <svg class="deco deco-flower" style="top:-10px;left:-10px" viewBox="0 0 70 70">
+        <path d="M35 12 Q45 22 35 35 Q25 22 35 12" fill="#F2D4D4"/>
+        <path d="M35 35 Q45 48 35 58 Q25 48 35 35" fill="#F9E8E8"/>
+        <circle cx="35" cy="35" r="4" fill="#D4A0A0"/>
+      </svg>
+      <h1>📅 План на месяц</h1>
+    </div>
+    <p class="muted">Подневный план. Отмечай выполненное — получай XP. Выполненные дни подсвечиваются розовым.</p>
+
+    <table class="plan-table">
+      <thead><tr><th>День</th><th>Задание</th><th>✓</th></tr></thead>
+      <tbody>
+        <tr><td><b>1</b></td><td>📖 Прочитать 5 стр. «Выдающийся ум»<br>🧠 Изучить «Нейропластичность»<br>🎬 Посмотреть 1 лекцию PostNauka</td><td><input type="checkbox" data-key="d1" data-xp="15"></td></tr>
+        <tr><td><b>2</b></td><td>📖 Ещё 5 стр. книги<br>🧠 Изучить «Система 1 и 2»<br>🔬 Пройти тест Струпа онлайн</td><td><input type="checkbox" data-key="d2" data-xp="15"></td></tr>
+        <tr><td><b>3</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Внимание как фильтр»<br>👗 Разобрать бренд Zara (3 приёма)</td><td><input type="checkbox" data-key="d3" data-xp="20"></td></tr>
+        <tr><td><b>4</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Память реконструктивна»<br>🇬🇧 Выучить 10 англ. слов по теме</td><td><input type="checkbox" data-key="d4" data-xp="15"></td></tr>
+        <tr><td><b>5</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Эффект якоря»<br>🗣️ Записать голос на диктофон</td><td><input type="checkbox" data-key="d5" data-xp="20"></td></tr>
+        <tr><td><b>6</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Предвзятость подтверждения»<br>🕵️ Поймать 3 искажения у себя</td><td><input type="checkbox" data-key="d6" data-xp="20"></td></tr>
+        <tr><td><b>7</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Петля привычки»<br>🌱 Внедрить 1 новую привычку</td><td><input type="checkbox" data-key="d7" data-xp="20"></td></tr>
+        <tr><td><b>8</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Кривая забывания»<br>🃏 Создать колоду в Quizlet (20 слов)</td><td><input type="checkbox" data-key="d8" data-xp="15"></td></tr>
+        <tr><td><b>9</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Дворец памяти»<br>🔬 Провести эксперимент с 20 словами</td><td><input type="checkbox" data-key="d9" data-xp="25"></td></tr>
+        <tr><td><b>10</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Дофамин»<br>📵 Провести 2 часа без телефона</td><td><input type="checkbox" data-key="d10" data-xp="20"></td></tr>
+        <tr><td><b>11</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Эффект Зейгарник»<br>👀 Наблюдение в кафе (5 паттернов)</td><td><input type="checkbox" data-key="d11" data-xp="25"></td></tr>
+        <tr><td><b>12</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Гештальт-принципы»<br>👗 Разобрать бренд Nike</td><td><input type="checkbox" data-key="d12" data-xp="20"></td></tr>
+        <tr><td><b>13</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Цветовая психология»<br>🎨 Сделать мудборд будущего бренда</td><td><input type="checkbox" data-key="d13" data-xp="25"></td></tr>
+        <tr><td><b>14</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Эффект владения»<br>📝 Написать инсайт в дневник</td><td><input type="checkbox" data-key="d14" data-xp="15"></td></tr>
+        <tr><td><b>15</b></td><td>🎯 <b>Промежуточный итог</b><br>📊 Проверить прогресс XP<br>📖 Дочитать первую книгу</td><td><input type="checkbox" data-key="d15" data-xp="30"></td></tr>
+        <tr><td><b>16</b></td><td>📖 Начать «Думай медленно…» (5 стр.)<br>🧠 Изучить «Ошибка выжившего»<br>🎬 Посмотреть TED Talk о мышлении</td><td><input type="checkbox" data-key="d16" data-xp="15"></td></tr>
+        <tr><td><b>17</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Иллюзия контроля»<br>🗣️ Упражнение на дикцию (10 мин)</td><td><input type="checkbox" data-key="d17" data-xp="15"></td></tr>
+        <tr><td><b>18</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Эффект толпы»<br>👗 Разобрать бренд Gucci</td><td><input type="checkbox" data-key="d18" data-xp="20"></td></tr>
+        <tr><td><b>19</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Когнитивный диссонанс»<br>🕵️ Поймать диссонанс у себя</td><td><input type="checkbox" data-key="d19" data-xp="20"></td></tr>
+        <tr><td><b>20</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Эффект Даннинга-Крюгера»<br>📝 Записать 3 инсайта в дневник</td><td><input type="checkbox" data-key="d20" data-xp="15"></td></tr>
+        <tr><td><b>21</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Flow (поток)»<br>🎯 Провести 1 час в состоянии потока</td><td><input type="checkbox" data-key="d21" data-xp="25"></td></tr>
+        <tr><td><b>22</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Пирамида Маслоу»<br>👗 Разобрать бренд H&M</td><td><input type="checkbox" data-key="d22" data-xp="20"></td></tr>
+        <tr><td><b>23</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Нейромедиаторы»<br>🌱 Проверить все свои привычки</td><td><input type="checkbox" data-key="d23" data-xp="15"></td></tr>
+        <tr><td><b>24</b></td><td>📖 5 стр. книги<br>🧠 Повторить «Система 1 и 2»<br>🔬 Провести эксперимент «Плацебо»</td><td><input type="checkbox" data-key="d24" data-xp="20"></td></tr>
+        <tr><td><b>25</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Эвристики»<br>👀 Наблюдение в транспорте</td><td><input type="checkbox" data-key="d25" data-xp="20"></td></tr>
+        <tr><td><b>26</b></td><td>📖 5 стр. книги<br>🧠 Изучить «Слепота невнимания»<br>🎬 Посмотреть видео про гориллу</td><td><input type="checkbox" data-key="d26" data-xp="15"></td></tr>
+        <tr><td><b>27</b></td><td>📖 5 стр. книги<br>🧠 Повторить все искажения<br>🗣️ Записать речь на диктофон</td><td><input type="checkbox" data-key="d27" data-xp="15"></td></tr>
+        <tr><td><b>28</b></td><td>📖 5 стр. книги<br>🧠 Изучить связь психологии и моды<br>🎨 Обновить мудборд бренда</td><td><input type="checkbox" data-key="d28" data-xp="25"></td></tr>
+        <tr><td><b>29</b></td><td>📖 Дочитать книгу<br>📝 Написать финальный инсайт<br>📊 Подсчитать XP за месяц</td><td><input type="checkbox" data-key="d29" data-xp="20"></td></tr>
+        <tr><td><b>30</b></td><td>🎯 <b>Финальный день</b><br>🏆 Отметить достижения<br>📅 Составить план на следующий месяц</td><td><input type="checkbox" data-key="d30" data-xp="30"></td></tr>
+      </tbody>
+    </table>
   </section>
 
 </main>
@@ -323,12 +517,36 @@
   <button data-tab="theory"><span class="ico">🧠</span>Теория</button>
   <button data-tab="practice"><span class="ico">🧪</span>Практика</button>
   <button data-tab="resources"><span class="ico">🔗</span>Ресурсы</button>
+  <button data-tab="plan"><span class="ico">📅</span>План</button>
 </nav>
 
 <script>
-  // вкладки
-  const tabs=document.querySelectorAll('nav button');
-  const screens=document.querySelectorAll('.screen');
+  // ===== ЛОГИН =====
+  function doLogin(){
+    const pass = document.getElementById('login-pass').value.trim();
+    if(!pass) return;
+    const saved = localStorage.getItem('cl_pass');
+    if(!saved){
+      localStorage.setItem('cl_pass', pass);
+      localStorage.setItem('cl_user', 'Пользователь');
+      document.getElementById('login-hint').textContent = 'Пароль сохранён. Запомни его — он только на этом устройстве.';
+      setTimeout(()=>document.getElementById('login-screen').style.display='none', 800);
+    } else if(saved === pass){
+      document.getElementById('login-screen').style.display='none';
+    } else {
+      document.getElementById('login-hint').textContent = '❌ Неверный пароль. Попробуй ещё раз.';
+      document.getElementById('login-pass').value = '';
+    }
+  }
+  document.getElementById('login-pass').addEventListener('keypress', e=>{if(e.key==='Enter')doLogin()});
+  // Автопроверка при загрузке
+  if(localStorage.getItem('cl_pass')){
+    document.getElementById('login-hint').textContent = 'Введи пароль для входа.';
+  }
+
+  // ===== ВКЛАДКИ =====
+  const tabs = document.querySelectorAll('nav button');
+  const screens = document.querySelectorAll('.screen');
   tabs.forEach(b=>b.addEventListener('click',()=>{
     tabs.forEach(x=>x.classList.remove('active'));
     screens.forEach(s=>s.classList.remove('active'));
@@ -336,52 +554,73 @@
     document.getElementById(b.dataset.tab).classList.add('active');
     window.scrollTo(0,0);
   }));
-  // чекбоксы + XP + конфетти
-  document.querySelectorAll('input[type=checkbox][data-key]').forEach(c=>{
-    c.checked = localStorage.getItem('ck_'+c.dataset.key)==='1';
-    c.addEventListener('change',()=>{
-      localStorage.setItem('ck_'+c.dataset.key, c.checked?'1':'0');
+
+  // ===== ЧЕСТНЫЙ ПЕРЕСЧЁТ XP =====
+  // При загрузке: считаем XP по всем отмеченным галочкам
+  // При изменении: прибавляем или вычитаем
+  function recalcXP(){
+    let total = 0;
+    document.querySelectorAll('input[type=checkbox][data-key]').forEach(c=>{
       if(c.checked){
-        const xp = parseInt(c.dataset.xp||5);
-        addXP(xp);
-        confetti();
+        total += parseInt(c.dataset.xp||0);
       }
     });
-  });
-  // textarea
-  document.querySelectorAll('textarea[data-key]').forEach(t=>{
-    t.value = localStorage.getItem('tx_'+t.dataset.key)||'';
-    t.addEventListener('input',()=>localStorage.setItem('tx_'+t.dataset.key, t.value));
-  });
-  // поиск
-  const search=document.getElementById('search');
-  if(search) search.addEventListener('input',()=>{
-    const q=search.value.toLowerCase();
-    document.querySelectorAll('#terms .term, details').forEach(t=>{
-      t.style.display = t.textContent.toLowerCase().includes(q)?'':'none';
-    });
-  });
-  // XP система
-  let xp = parseInt(localStorage.getItem('xp')||0);
-  const lvlTitles = ['Новичок','Исследователь','Аналитик','Наблюдатель','Эксперт','Мастер','Гуру'];
-  function updateXP(){
+    return total;
+  }
+  function updateXPDisplay(){
+    const xp = recalcXP();
     const lvl = Math.floor(xp/100)+1;
-    const need = lvl*100;
+    const lvlTitles = ['Новичок','Исследователь','Аналитик','Наблюдатель','Эксперт','Мастер','Гуру','Легенда'];
+    const need = 100;
     const cur = xp % 100;
     document.getElementById('lvl-num').textContent = lvl;
     document.getElementById('lvl-title').textContent = lvlTitles[Math.min(lvl-1,lvlTitles.length-1)];
     document.getElementById('xp-cur').textContent = cur;
     document.getElementById('xp-need').textContent = need;
     document.getElementById('xp-fill').style.width = (cur/need*100)+'%';
-    localStorage.setItem('xp', xp);
+    // Подсветка выполненных дней в плане
+    document.querySelectorAll('.plan-table tr').forEach(tr=>{
+      const cb = tr.querySelector('input[type=checkbox]');
+      if(cb && cb.checked) tr.classList.add('done');
+      else tr.classList.remove('done');
+    });
   }
-  function addXP(n){ xp += n; updateXP(); }
-  updateXP();
-  // конфетти
+  document.querySelectorAll('input[type=checkbox][data-key]').forEach(c=>{
+    // Восстановить состояние
+    c.checked = localStorage.getItem('ck_'+c.dataset.key)==='1';
+    c.addEventListener('change',()=>{
+      const wasChecked = localStorage.getItem('ck_'+c.dataset.key)==='1';
+      localStorage.setItem('ck_'+c.dataset.key, c.checked?'1':'0');
+      if(c.checked && !wasChecked){
+        confetti();
+      }
+      updateXPDisplay();
+    });
+  });
+
+  // ===== TEXTAREA =====
+  document.querySelectorAll('textarea[data-key]').forEach(t=>{
+    t.value = localStorage.getItem('tx_'+t.dataset.key)||'';
+    t.addEventListener('input',()=>localStorage.setItem('tx_'+t.dataset.key, t.value));
+  });
+
+  // ===== ПОИСК =====
+  const search = document.getElementById('search');
+  if(search) search.addEventListener('input',()=>{
+    const q = search.value.toLowerCase();
+    document.querySelectorAll('#terms .term').forEach(t=>{
+      t.style.display = t.textContent.toLowerCase().includes(q)?'':'none';
+    });
+    document.querySelectorAll('details').forEach(d=>{
+      d.style.display = d.textContent.toLowerCase().includes(q)?'':'none';
+    });
+  });
+
+  // ===== КОНФЕТТИ =====
   function confetti(){
-    const colors = ['#6B7F6B','#C89B7B','#D4A574','#E8C4A0','#8FA88F'];
-    const emojis = ['🌸','✨','⭐','🌿','💫'];
-    for(let i=0;i<25;i++){
+    const colors = ['#F2D4D4','#D4A0A0','#C89B7B','#6B7F6B','#E8C4A0'];
+    const emojis = ['🌸','✨','⭐','🌿','💫','🌺','🎀'];
+    for(let i=0;i<20;i++){
       const el = document.createElement('div');
       el.className='confetti';
       el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
@@ -393,6 +632,49 @@
       setTimeout(()=>el.remove(), 3000);
     }
   }
+
+  // ===== ЭКСПОРТ/ИМПОРТ ДАННЫХ =====
+  function exportData(){
+    const data = {};
+    document.querySelectorAll('input[type=checkbox][data-key]').forEach(c=>{
+      data['ck_'+c.dataset.key] = c.checked?'1':'0';
+    });
+    document.querySelectorAll('textarea[data-key]').forEach(t=>{
+      data['tx_'+t.dataset.key] = t.value;
+    });
+    const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'cognitive-lab-data.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+  function importData(event){
+    const file = event.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = e=>{
+      try{
+        const data = JSON.parse(e.target.result);
+        Object.keys(data).forEach(k=>{
+          localStorage.setItem(k, data[k]);
+          const cb = document.querySelector('[data-key="'+k.replace('ck_','')+'"]');
+          if(cb) cb.checked = data[k]==='1';
+          const ta = document.querySelector('textarea[data-key="'+k.replace('tx_','')+'"]');
+          if(ta) ta.value = data[k];
+        });
+        updateXPDisplay();
+        alert('✅ Данные загружены! Прогресс восстановлен.');
+      }catch(err){
+        alert('❌ Ошибка загрузки файла.');
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  // Инициализация
+  updateXPDisplay();
 </script>
 </body>
 </html>
