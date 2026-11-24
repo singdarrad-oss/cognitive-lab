@@ -7,41 +7,63 @@
 <style>
   :root{
     --bg:#FAF7F2; --card:#fff; --text:#2C2C2C; --soft:#6B6B6B;
-    --green:#6B7F6B; --terra:#C89B7B; --line:#E8E2D5;
+    --green:#6B7F6B; --terra:#C89B7B; --line:#E8E2D5; --gold:#D4A574;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding-bottom:78px}
+  body{font-family:-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding-bottom:82px}
   h1{font-size:1.6rem;color:var(--green);margin-bottom:.4rem}
-  h2{font-size:1.15rem;color:var(--green);margin:1rem 0 .5rem;border-bottom:2px solid var(--line);padding-bottom:.3rem}
-  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,247,242,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:.8rem 1rem;text-align:center}
+  h2{font-size:1.15rem;color:var(--green);margin:1.2rem 0 .5rem;border-bottom:2px solid var(--line);padding-bottom:.3rem}
+  h3{font-size:1rem;color:var(--terra);margin:.6rem 0 .3rem}
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,247,242,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:.7rem 1rem;text-align:center}
   .topbar b{color:var(--terra);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;display:block}
   main{max-width:760px;margin:0 auto;padding:1rem}
-  .screen{display:none;animation:fade .25s}
+  .screen{display:none;animation:fade .3s}
   .screen.active{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem;margin-bottom:.9rem;box-shadow:0 2px 10px rgba(0,0,0,.04)}
-  .btn{display:inline-block;background:var(--green);color:#fff;text-decoration:none;padding:.55rem 1rem;border-radius:10px;font-size:.9rem;margin:.25rem .3rem .25rem 0;border:none;cursor:pointer}
+  .btn{display:inline-block;background:var(--green);color:#fff;text-decoration:none;padding:.55rem 1rem;border-radius:10px;font-size:.85rem;margin:.25rem .3rem .25rem 0;border:none;cursor:pointer;transition:transform .15s}
   .btn.terra{background:var(--terra)}
-  .btn:active{transform:scale(.97)}
+  .btn.gold{background:var(--gold)}
+  .btn:active{transform:scale(.95)}
   .row{display:flex;align-items:center;gap:.6rem;padding:.5rem 0;border-bottom:1px dashed var(--line)}
   .row:last-child{border-bottom:none}
-  .row label{flex:1}
-  input[type=checkbox]{width:22px;height:22px;accent-color:var(--green)}
-  input[type=text],textarea{width:100%;padding:.7rem;border:1px solid var(--line);border-radius:10px;font:inherit;background:#FDFBF6}
+  .row label{flex:1;font-size:.95rem}
+  input[type=checkbox]{width:22px;height:22px;accent-color:var(--green);cursor:pointer}
+  input[type=text],textarea{width:100%;padding:.7rem;border:1px solid var(--line);border-radius:10px;font:inherit;background:#FDFBF6;font-size:.95rem}
   textarea{min-height:120px;resize:vertical}
   details{background:#FDFBF6;border-left:3px solid var(--green);padding:.7rem .9rem;margin-bottom:.6rem;border-radius:0 10px 10px 0}
-  details summary{cursor:pointer;font-weight:600;color:var(--green)}
-  details p{margin-top:.5rem;color:var(--soft);font-size:.95rem}
+  details summary{cursor:pointer;font-weight:600;color:var(--green);font-size:.95rem}
+  details p{margin-top:.5rem;color:var(--soft);font-size:.9rem}
   .term{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.8rem;margin-bottom:.6rem}
   .term h3{color:var(--terra);font-size:1rem;margin-bottom:.2rem}
-  .term p{font-size:.92rem;color:var(--soft)}
+  .term p{font-size:.9rem;color:var(--soft)}
   .quote{border-left:3px solid var(--terra);padding:.8rem 1rem;font-style:italic;background:#FDFBF6;border-radius:0 10px 10px 0;margin:1rem 0}
   .muted{color:var(--soft);font-size:.9rem}
+  .section-title{font-size:.85rem;color:var(--terra);text-transform:uppercase;letter-spacing:.1em;margin:1.2rem 0 .6rem;font-weight:600}
+  .book-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem;margin-bottom:.7rem}
+  .book-item h3{margin:0 0 .2rem 0;color:var(--text);font-size:1.05rem}
+  .book-item .author{color:var(--green);font-size:.85rem;margin-bottom:.4rem}
+  .book-item p{font-size:.88rem;color:var(--soft);margin-bottom:.5rem}
+  .resource-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem;margin-bottom:.7rem}
+  .resource-card h3{margin:0 0 .3rem 0;color:var(--text);font-size:1rem}
+  .resource-card p{font-size:.88rem;color:var(--soft);margin-bottom:.5rem}
+  /* XP bar */
+  .xp-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.9rem;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem}
+  .xp-info{flex:1}
+  .xp-info .lvl{font-weight:700;color:var(--green);font-size:1.1rem}
+  .xp-info .xp-text{font-size:.8rem;color:var(--soft)}
+  .xp-bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden;margin-top:.4rem}
+  .xp-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--terra));transition:width .5s}
+  /* confetti */
+  .confetti{position:fixed;top:-20px;width:10px;height:10px;border-radius:50%;pointer-events:none;z-index:9999;animation:fall 2.5s linear forwards}
+  @keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
   /* bottom nav */
   nav{position:fixed;bottom:0;left:0;right:0;z-index:60;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:.4rem 0 .6rem}
   nav button{background:none;border:none;font:inherit;color:var(--soft);display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.62rem;cursor:pointer;padding:.2rem .4rem;border-radius:10px}
   nav button .ico{font-size:1.3rem}
   nav button.active{color:var(--green);font-weight:600}
+  .challenge{background:linear-gradient(135deg,#FDFBF6,#FAF7F2);border:1px dashed var(--terra);border-radius:12px;padding:.9rem;margin-bottom:.7rem}
+  .challenge .tag{display:inline-block;background:var(--terra);color:#fff;padding:.15rem .5rem;border-radius:6px;font-size:.7rem;margin-bottom:.4rem}
 </style>
 </head>
 <body>
@@ -53,52 +75,116 @@
   <!-- ГЛАВНАЯ -->
   <section class="screen active" id="home">
     <h1>Привет 👋</h1>
-    <p class="muted">Это твоё приложение для изучения когнитивной психологии. Всё, что ты отмечаешь и пишешь, сохраняется само.</p>
+    <p class="muted">Твоё приложение для изучения когнитивной психологии и саморазвития. Всё сохраняется автоматически.</p>
+    
+    <div class="xp-wrap">
+      <div class="xp-info">
+        <div class="lvl">Уровень <span id="lvl-num">1</span> · <span id="lvl-title">Новичок</span></div>
+        <div class="xp-text"><span id="xp-cur">0</span> / <span id="xp-need">50</span> XP</div>
+        <div class="xp-bar"><div class="xp-fill" id="xp-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+
     <div class="card">
       <h2>🎯 Цель месяца</h2>
       <p>Понять, как работает мозг: наблюдать за людьми, проверять теорию на себе и применять знания (учёба, привычки, будущий бренд).</p>
     </div>
+
     <div class="card">
-      <h2>📌 С чего начать</h2>
-      <div class="row"><label>Прочитать первую главу книги</label><input type="checkbox" data-key="s1"></div>
-      <div class="row"><label>Пройти эффект Струпа</label><input type="checkbox" data-key="s2"></div>
-      <div class="row"><label>Добавить первую привычку</label><input type="checkbox" data-key="s3"></div>
-      <div class="row"><label>Записать 5 английских слов</label><input type="checkbox" data-key="s4"></div>
+      <h2>📌 Быстрый старт</h2>
+      <div class="row"><label>Прочитать первую главу книги</label><input type="checkbox" data-key="s1" data-xp="10"></div>
+      <div class="row"><label>Пройти эффект Струпа</label><input type="checkbox" data-key="s2" data-xp="15"></div>
+      <div class="row"><label>Добавить первую привычку</label><input type="checkbox" data-key="s3" data-xp="10"></div>
+      <div class="row"><label>Записать 5 английских слов</label><input type="checkbox" data-key="s4" data-xp="10"></div>
+      <div class="row"><label>Записать инсайт в дневник</label><input type="checkbox" data-key="s5" data-xp="10"></div>
     </div>
+
     <div class="quote">«Мы не видим вещи такими, какие они есть. Мы видим их такими, какие мы есть.» — Анаис Нин</div>
   </section>
 
   <!-- КНИГИ -->
   <section class="screen" id="books">
-    <h1>📚 Книги</h1>
-    <p class="muted">Кнопка «Открыть» ведёт на страницу книги (купить/читать). Отмечай галочкой, что читаешь.</p>
+    <h1>📚 Библиотека</h1>
+    <p class="muted">Ссылки ведут на сервисы, где можно сразу читать (Литрес, Яндекс.Книги, MyBook).</p>
 
-    <div class="card">
-      <h2>Выдающийся ум</h2>
-      <p class="muted">Мария Конникова. Как думать как Шерлок Холмс: наблюдательность, внимание, «мозговой чердак». Идеально для старта.</p>
-      <a class="btn" href="https://www.ozon.ru/search/?text=Выдающийся%20ум%20Конникова" target="_blank">Открыть книгу</a>
-      <div class="row"><label>Читаю эту книгу</label><input type="checkbox" data-key="bk1"></div>
+    <div class="section-title">🧠 Когнитивная психология</div>
+
+    <div class="book-item">
+      <h3>Выдающийся ум</h3>
+      <div class="author">Мария Конникова</div>
+      <p>Как думать как Шерлок Холмс: наблюдательность, внимание, «мозговой чердак». Идеально для старта.</p>
+      <a class="btn" href="https://www.litres.ru/book/mariya-konnikova/vydayuschiysya-um-67740301/" target="_blank">Литрес</a>
+      <a class="btn terra" href="https://yandex.ru/search/?text=Выдающийся+ум+Конникова+Яндекс+Книги" target="_blank">Яндекс.Книги</a>
+      <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk1" data-xp="20"></div>
     </div>
 
-    <div class="card">
-      <h2>Думай медленно… решай быстро</h2>
-      <p class="muted">Даниэль Канеман. Система 1 и Система 2, когнитивные искажения. Библия темы — читается по главам.</p>
-      <a class="btn" href="https://www.litres.ru/поиск/?q=Думай%20медленно%20решай%20быстро" target="_blank">Открыть книгу</a>
-      <div class="row"><label>Читаю эту книгу</label><input type="checkbox" data-key="bk2"></div>
+    <div class="book-item">
+      <h3>Думай медленно… решай быстро</h3>
+      <div class="author">Даниэль Канеман</div>
+      <p>Библия когнитивной психологии. Система 1 и 2, когнитивные искажения. Нобелевский лауреат.</p>
+      <a class="btn" href="https://www.litres.ru/book/daniel-kaneman/dumay-medlenno-reshay-bystro-11196482/" target="_blank">Литрес</a>
+      <a class="btn terra" href="https://www.mybook.ru/author/daniel-kaneman/dumay-medlenno-reshaj-bystro/" target="_blank">MyBook</a>
+      <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk2" data-xp="20"></div>
     </div>
 
-    <div class="card">
-      <h2>Психология влияния</h2>
-      <p class="muted">Роберт Чалдини. 6 принципов убеждения — то, что нужно для понимания маркетинга и твоего будущего бренда.</p>
-      <a class="btn" href="https://www.ozon.ru/search/?text=Психология%20влияния%20Чалдини" target="_blank">Открыть книгу</a>
-      <div class="row"><label>Читаю эту книгу</label><input type="checkbox" data-key="bk3"></div>
+    <div class="book-item">
+      <h3>Психология влияния</h3>
+      <div class="author">Роберт Чалдини</div>
+      <p>6 принципов убеждения — must-have для понимания маркетинга и твоего будущего бренда.</p>
+      <a class="btn" href="https://www.litres.ru/book/robert-chaldini/psihologiya-vliyaniya-11196471/" target="_blank">Литрес</a>
+      <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk3" data-xp="20"></div>
     </div>
 
-    <div class="card">
-      <h2>В интернете кто-то неправ!</h2>
-      <p class="muted">Ася Казанцева. Мифы о мозге, еде и привычках. Легко, смешно, быстро.</p>
-      <a class="btn" href="https://www.ozon.ru/search/?text=В%20интернете%20кто-то%20неправ%20Казанцева" target="_blank">Открыть книгу</a>
-      <div class="row"><label>Читаю эту книгу</label><input type="checkbox" data-key="bk4"></div>
+    <div class="book-item">
+      <h3>В интернете кто-то неправ!</h3>
+      <div class="author">Ася Казанцева</div>
+      <p>Мифы о мозге, еде и привычках. Легко, смешно, быстро читается.</p>
+      <a class="btn" href="https://www.litres.ru/book/asya-kazanceva/v-internete-kto-to-neprav-11196462/" target="_blank">Литрес</a>
+      <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk4" data-xp="20"></div>
+    </div>
+
+    <div class="section-title">✨ Саморазвитие</div>
+
+    <div class="book-item">
+      <h3>Короли речи</h3>
+      <div class="author">Ларри Кинг</div>
+      <p>Как говорить с кем угодно, когда угодно и где угодно. Классика по развитию речи и уверенности.</p>
+      <a class="btn" href="https://www.litres.ru/book/larri-king/koroli-rechi-11196453/" target="_blank">Литрес</a>
+      <a class="btn terra" href="https://www.mybook.ru/author/larri-king/koroli-rechi/" target="_blank">MyBook</a>
+      <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk5" data-xp="20"></div>
+    </div>
+
+    <div class="book-item">
+      <h3>Харизма. Как влиять, убеждать и вдохновлять</h3>
+      <div class="author">Оливия Фокс Кабейн</div>
+      <p>Научный подход к харизме: присутствие, сила, теплота. Разбирается по компонентам.</p>
+      <a class="btn" href="https://www.litres.ru/book/oliviya-foks-kabeyn/harizma-kak-vliyat-ubezhdat-i-vdohnovlyat-11196444/" target="_blank">Литрес</a>
+      <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk6" data-xp="20"></div>
+    </div>
+
+    <div class="book-item">
+      <h3>Сила слова</h3>
+      <div class="author">Джеймс Берг</div>
+      <p>Техники развития дикции, голоса и ораторского мастерства. Упражнения на каждый день.</p>
+      <a class="btn" href="https://www.litres.ru/genre/samorazvitie/?q=дикция+голос" target="_blank">Литрес (подборка)</a>
+      <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk7" data-xp="20"></div>
+    </div>
+
+    <div class="book-item">
+      <h3>Гибкое сознание</h3>
+      <div class="author">Кэрол Дуэк</div>
+      <p>Про mindset роста — почему одни сдаются, а другие растут. Основа для любого развития.</p>
+      <a class="btn" href="https://www.litres.ru/book/kerol-duek/gibkoe-soznanie-11196435/" target="_blank">Литрес</a>
+      <a class="btn terra" href="https://www.mybook.ru/author/kerol-duek/gibkoe-soznanie/" target="_blank">MyBook</a>
+      <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk8" data-xp="20"></div>
+    </div>
+
+    <div class="book-item">
+      <h3>Атомные привычки</h3>
+      <div class="author">Джеймс Клир</div>
+      <p>Как выстраивать хорошие привычки и избавляться от плохих. Маленькие шаги — большие результаты.</p>
+      <a class="btn" href="https://www.litres.ru/book/dzhems-klir/atomnye-privychki-11196426/" target="_blank">Литрес</a>
+      <div class="row"><label>Читаю</label><input type="checkbox" data-key="bk9" data-xp="20"></div>
     </div>
   </section>
 
@@ -106,49 +192,94 @@
   <section class="screen" id="theory">
     <h1>🧠 Теория</h1>
     <p class="muted">Раскрывай блоки и ищи термины через поиск.</p>
-    <input type="text" id="search" placeholder="Поиск термина… (например: память)">
+    <input type="text" id="search" placeholder="🔍 Поиск термина…">
 
-    <h2>Развёрнутые темы</h2>
-    <details><summary>Нейропластичность</summary><p>Мозг физически меняется от опыта: каждое обучение создаёт новые связи между нейронами. Значит, «умнеть» можно в любом возрасте — это не врождённый потолок, а процесс.</p></details>
-    <details><summary>Система 1 и Система 2</summary><p>Система 1 — быстрая, интуитивная, автоматическая (узнаёт лица, читает). Система 2 — медленная, логическая, требует усилия (считает, анализирует). Большинство решений принимает Система 1, и именно из-за этого возникают ошибки.</p></details>
-    <details><summary>Внимание как фильтр</summary><p>Мозг фильтрует ~99% потока информации. Мы видим не всё, а то, на что направлен «прожектор» внимания. Отсюда слепота невнимания и миф о многозадачности.</p></details>
-    <details><summary>Память реконструктивна</summary><p>Мы не «вспоминаем» как видео — каждый раз мозг заново собирает воспоминание и может менять детали. Поэтому память ненадёжна, а интервальные повторения так важны.</p></details>
-    <details><summary>Восприятие субъективно</summary><p>Два человека видят одну картину по-разному: влияют ожидания, опыт, эмоции, контекст. Для дизайна и бренда это ключ: как вещь «читается», а не только как она есть.</p></details>
+    <h2>Основы работы мозга</h2>
+    <details><summary>🔹 Нейропластичность</summary><p>Мозг физически меняется от опыта: каждое обучение создаёт новые связи между нейронами. Значит, «умнеть» можно в любом возрасте — это не врождённый потолок, а процесс.</p></details>
+    <details><summary>🔹 Система 1 и Система 2</summary><p>Система 1 — быстрая, интуитивная, автоматическая (узнаёт лица, читает). Система 2 — медленная, логическая, требует усилия (считает, анализирует). Большинство решений принимает Система 1, и именно из-за этого возникают ошибки.</p></details>
+    <details><summary>🔹 Внимание как фильтр</summary><p>Мозг фильтрует ~99% потока информации. Мы видим не всё, а то, на что направлен «прожектор» внимания. Отсюда слепота невнимания и миф о многозадачности.</p></details>
+    <details><summary>🔹 Память реконструктивна</summary><p>Мы не «вспоминаем» как видео — каждый раз мозг заново собирает воспоминание и может менять детали. Поэтому память ненадёжна, а интервальные повторения так важны.</p></details>
+    <details><summary>🔹 Восприятие субъективно</summary><p>Два человека видят одну картину по-разному: влияют ожидания, опыт, эмоции, контекст. Для дизайна и бренда это ключ: как вещь «читается», а не только как она есть.</p></details>
+
+    <h2>Когнитивные искажения</h2>
+    <details><summary>🔸 Эффект якоря</summary><p>Первая полученная информация «якорит» все последующие оценки. Используется в ценообразовании: сначала показывают дорогое, потом «скидка» кажется выгодной.</p></details>
+    <details><summary>🔸 Предвзятость подтверждения</summary><p>Мы ищем и запоминаем то, что подтверждает наши убеждения, и игнорируем противоположное. Главная ловушка мышления.</p></details>
+    <details><summary>🔸 Ошибка выжившего</summary><p>Судим по успешным, игнорируя провалившихся. «Стив Джобс бросил университет и стал миллиардером» — но мы не видим тысячи таких же, кто не стал.</p></details>
+    <details><summary>🔸 Эффект толпы</summary><p>Мы склонны повторять действия большинства, даже если они нелогичны. Основа маркетинга «все покупают — и ты купи».</p></details>
+    <details><summary>🔸 Иллюзия контроля</summary><p>Нам кажется, что мы контролируем ситуацию больше, чем на самом деле. Отсюда азартные игры и суеверия.</p></details>
+
+    <h2>Память и обучение</h2>
+    <details><summary>🔹 Кривая забывания Эббингауза</summary><p>Без повторения мы забываем ~60% информации за час. Но если повторить через 20 мин, 8 часов, день, неделю — память становится почти вечной.</p></details>
+    <details><summary>🔹 Рабочая память</summary><p>«Стол» мозга, где мы держим 4–7 единиц информации одновременно. Перегружается быстро — поэтому многозадачность не работает.</p></details>
+    <details><summary>🔹 Интервальные повторения</summary><p>Повторяем через растущие промежутки времени — это лучший способ перенести знание в долговременную память.</p></details>
+    <details><summary>🔹 Дворец памяти (метод локусов)</summary><p>Древняя техника: раскладываем запоминаемое по знакомым местам (комнатам). Мозг отлично запоминает пространство.</p></details>
+
+    <h2>Привычки и поведение</h2>
+    <details><summary>🔹 Петля привычки</summary><p>Триггер → Действие → Награда. Мозг автоматизирует всё повторяющееся. Чтобы изменить привычку — меняй действие, оставляя триггер и награду.</p></details>
+    <details><summary>🔹 Дофамин</summary><p>Нейромедиатор предвкушения награды. Именно он заставляет нас тянуться к телефону, сладкому, лайкам. Понимание дофамина = ключ к самоконтролю.</p></details>
+    <details><summary>🔹 Эффект Зейгарник</summary><p>Незавершённые задачи запоминаются лучше завершённых. Поэтому сериалы «крючают» на клиффхэнгерах.</p></details>
 
     <h2>Словарь терминов</h2>
     <div id="terms">
       <div class="term"><h3>Эффект Струпа</h3><p>Конфликт между автоматическим чтением и называнием цвета шрифта.</p></div>
       <div class="term"><h3>Слепота невнимания</h3><p>Незамечание очевидного при фокусе на другом.</p></div>
-      <div class="term"><h3>Эффект якоря</h3><p>Первая информация смещает последующие оценки.</p></div>
-      <div class="term"><h3>Предвзятость подтверждения</h3><p>Ищем то, что подтверждает нашу точку зрения.</p></div>
-      <div class="term"><h3>Рабочая память</h3><p>Кратковременный «стол», где держим 4–7 единиц.</p></div>
-      <div class="term"><h3>Интервальные повторения</h3><p>Повторяем через растущие промежутки — против кривой забывания.</p></div>
-      <div class="term"><h3>Гештальт-принципы</h3><p>Правила восприятия целого: близость, сходство, замкнутость.</p></div>
       <div class="term"><h3>Эвристика</h3><p>Ментальное «сокращение» для быстрого решения.</p></div>
-      <div class="term"><h3>Дофаминовая петля</h3><p>Триггер → действие → награда; основа привычек.</p></div>
-      <div class="term"><h3>Ошибка выжившего</h3><p>Судим по успешным, игнорируя провалившихся.</p></div>
+      <div class="term"><h3>Гештальт-принципы</h3><p>Правила восприятия целого: близость, сходство, замкнутость.</p></div>
+      <div class="term"><h3>Эффект плацебо</h3><p>Ожидание эффекта создаёт реальный эффект.</p></div>
+      <div class="term"><h3>Когнитивный диссонанс</h3><p>Дискомфорт от противоречия между убеждениями и действиями.</p></div>
+      <div class="term"><h3>Эффект Даннинга-Крюгера</h3><p>Новички переоценивают себя, эксперты — недооценивают.</p></div>
+      <div class="term"><h3>Пирамида Маслоу</h3><p>Иерархия потребностей: от физиологии до самоактуализации.</p></div>
+      <div class="term"><h3>Flow (поток)</h3><p>Состояние полной вовлечённости в задачу. Пик продуктивности.</p></div>
+      <div class="term"><h3>Нейромедиатор</h3><p>Химический передатчик сигналов между нейронами (дофамин, серотонин и др.).</p></div>
     </div>
   </section>
 
   <!-- ПРАКТИКА -->
   <section class="screen" id="practice">
     <h1>🧪 Практика</h1>
-    <h2>Мои привычки (отмечай включённые)</h2>
+
+    <h2>🌱 Мои привычки</h2>
     <div class="card">
-      <div class="row"><label>📖 Чтение 15 мин</label><input type="checkbox" data-key="h1"></div>
-      <div class="row"><label>🇬🇧 10 английских слов</label><input type="checkbox" data-key="h2"></div>
-      <div class="row"><label>💧 Стакан воды утром</label><input type="checkbox" data-key="h3"></div>
-      <div class="row"><label>🧴 Уход вечером</label><input type="checkbox" data-key="h4"></div>
-      <div class="row"><label>📵 Телефон за час до сна</label><input type="checkbox" data-key="h5"></div>
+      <div class="row"><label>📖 Чтение 15 мин</label><input type="checkbox" data-key="h1" data-xp="5"></div>
+      <div class="row"><label>🇬🇧 10 английских слов</label><input type="checkbox" data-key="h2" data-xp="5"></div>
+      <div class="row"><label>💧 Стакан воды утром</label><input type="checkbox" data-key="h3" data-xp="3"></div>
+      <div class="row"><label>🧴 Уход вечером</label><input type="checkbox" data-key="h4" data-xp="3"></div>
+      <div class="row"><label>📵 Телефон за час до сна</label><input type="checkbox" data-key="h5" data-xp="5"></div>
+      <div class="row"><label>🧘 5 мин тишины</label><input type="checkbox" data-key="h6" data-xp="5"></div>
+      <div class="row"><label>🗣️ Упражнение на дикцию</label><input type="checkbox" data-key="h7" data-xp="5"></div>
     </div>
-    <h2>Эксперименты (отмечай проведённые)</h2>
+
+    <h2>🔬 Эксперименты на себе</h2>
     <div class="card">
-      <div class="row"><label>Эффект Струпа</label><input type="checkbox" data-key="e1"></div>
-      <div class="row"><label>Слепота невнимания</label><input type="checkbox" data-key="e2"></div>
-      <div class="row"><label>Эффект якоря</label><input type="checkbox" data-key="e3"></div>
-      <div class="row"><label>Дворец памяти</label><input type="checkbox" data-key="e4"></div>
+      <div class="row"><label>Эффект Струпа</label><input type="checkbox" data-key="e1" data-xp="15"></div>
+      <div class="row"><label>Слепота невнимания</label><input type="checkbox" data-key="e2" data-xp="15"></div>
+      <div class="row"><label>Эффект якоря</label><input type="checkbox" data-key="e3" data-xp="15"></div>
+      <div class="row"><label>Дворец памяти (20 слов)</label><input type="checkbox" data-key="e4" data-xp="20"></div>
+      <div class="row"><label>День без когнитивных искажений</label><input type="checkbox" data-key="e5" data-xp="25"></div>
+      <div class="row"><label>Эффект плацебо на друзьях</label><input type="checkbox" data-key="e6" data-xp="15"></div>
     </div>
-    <h2>Дневник мозга</h2>
+
+    <h2>🎯 Челленджи недели</h2>
+    <div class="challenge">
+      <span class="tag">Челлендж</span>
+      <h3>25 минут Pomodoro без телефона</h3>
+      <p class="muted">Поставь таймер на 25 минут. Телефон — в другую комнату. Запиши, сколько раз потянулся к нему.</p>
+      <div class="row"><label>Выполнено</label><input type="checkbox" data-key="c1" data-xp="20"></div>
+    </div>
+    <div class="challenge">
+      <span class="tag">Челлендж</span>
+      <h3>Поймать 3 искажения у себя</h3>
+      <p class="muted">В течение дня замечай моменты, когда твой мозг «срезает угол». Запиши в дневник.</p>
+      <div class="row"><label>Выполнено</label><input type="checkbox" data-key="c2" data-xp="25"></div>
+    </div>
+    <div class="challenge">
+      <span class="tag">Челлендж</span>
+      <h3>Проанализировать 1 бренд</h3>
+      <p class="muted">Выбери любимый бренд одежды. Найди 3 когнитивных приёма, которые он использует.</p>
+      <div class="row"><label>Выполнено</label><input type="checkbox" data-key="c3" data-xp="30"></div>
+    </div>
+
+    <h2>📓 Дневник мозга</h2>
     <p class="muted">Пиши наблюдения за людьми и инсайты. Сохраняется автоматически.</p>
     <textarea data-key="journal" placeholder="Сегодня я заметила, что человек…"></textarea>
   </section>
@@ -156,13 +287,32 @@
   <!-- РЕСУРСЫ -->
   <section class="screen" id="resources">
     <h1>🔗 Ресурсы</h1>
-    <p class="muted">Нажимай на карточки — открываются в браузере.</p>
-    <div class="card"><a class="btn" href="https://postnauka.ru" target="_blank">PostNauka — лекции</a><p class="muted">Ищи «как работает память», «внимание».</p></div>
-    <div class="card"><a class="btn" href="https://quizlet.com" target="_blank">Quizlet — карточки</a><p class="muted">Для английских слов и терминов.</p></div>
-    <div class="card"><a class="btn" href="https://www.simplypsychology.org" target="_blank">Simply Psychology</a><p class="muted">Статьи на простом английском (заодно язык).</p></div>
-    <div class="card"><a class="btn" href="https://www.coursera.org/learn/introduction-psych" target="_blank">Coursera: Intro to Psychology</a><p class="muted">Бесплатный курс Yale.</p></div>
-    <div class="card"><a class="btn" href="https://arzamas.academy" target="_blank">Arzamas</a><p class="muted">Культура, мышление, восприятие.</p></div>
-    <div class="card"><a class="btn" href="https://www.youtube.com/@utopiashow" target="_blank">Utopia Show</a><p class="muted">Разборы мифов о мозге.</p></div>
+    <p class="muted">Всё разделено по категориям. Тапай — откроется в браузере.</p>
+
+    <div class="section-title">📺 Видео</div>
+    <div class="resource-card"><h3>Utopia Show</h3><p>Разборы мифов о мозге, психологии и поведении.</p><a class="btn" href="https://www.youtube.com/@utopiashow" target="_blank">YouTube</a></div>
+    <div class="resource-card"><h3>Toples</h3><p>Научпоп-разборы психологических экспериментов.</p><a class="btn" href="https://www.youtube.com/@ToplessTopor" target="_blank">YouTube</a></div>
+    <div class="resource-card"><h3>Kurzgesagt (англ.)</h3><p>Красивые анимации про мозг, привычки, сознание.</p><a class="btn" href="https://www.youtube.com/@kurzgesagt" target="_blank">YouTube</a></div>
+    <div class="resource-card"><h3>Лекции ВШЭ по психологии</h3><p>Настоящие университетские лекции на русском.</p><a class="btn" href="https://www.youtube.com/results?search_query=лекции+ВШЭ+когнитивная+психология" target="_blank">YouTube</a></div>
+
+    <div class="section-title">🎧 Подкасты</div>
+    <div class="resource-card"><h3>Психология на Дожде</h3><p>Русскоязычный подкаст о психологии простым языком.</p><a class="btn" href="https://music.yandex.ru/album/10737877" target="_blank">Яндекс.Музыка</a></div>
+    <div class="resource-card"><h3>Huberman Lab (англ.)</h3><p>Нейробиолог Стэнфорда разбирает работу мозга.</p><a class="btn" href="https://www.youtube.com/@hubermanlab" target="_blank">YouTube</a></div>
+
+    <div class="section-title">📰 Статьи и лекции</div>
+    <div class="resource-card"><h3>PostNauka</h3><p>Короткие лекции от учёных ВШЭ и МГУ.</p><a class="btn" href="https://postnauka.ru/themes/psychology" target="_blank">Открыть</a></div>
+    <div class="resource-card"><h3>Simply Psychology</h3><p>Статьи на простом английском — заодно язык качаешь.</p><a class="btn" href="https://www.simplypsychology.org" target="_blank">Открыть</a></div>
+    <div class="resource-card"><h3>Arzamas</h3><p>Курсы о культуре, мышлении, восприятии.</p><a class="btn" href="https://arzamas.academy" target="_blank">Открыть</a></div>
+    <div class="resource-card"><h3>КиберЛенинка</h3><p>Научные статьи бесплатно. Для глубокого погружения.</p><a class="btn" href="https://cyberleninka.ru" target="_blank">Открыть</a></div>
+
+    <div class="section-title">🃏 Карточки и запоминание</div>
+    <div class="resource-card"><h3>Quizlet</h3><p>Готовые карточки по психологии + свои колоды.</p><a class="btn" href="https://quizlet.com" target="_blank">Открыть</a></div>
+    <div class="resource-card"><h3>Anki</h3><p>Мощнее Quizlet, с интервальными повторениями.</p><a class="btn" href="https://apps.ankiweb.net" target="_blank">Открыть</a></div>
+
+    <div class="section-title">🎓 Курсы</div>
+    <div class="resource-card"><h3>Intro to Psychology (Yale)</h3><p>Бесплатный курс на Coursera от Йельского университета.</p><a class="btn" href="https://www.coursera.org/learn/introduction-psych" target="_blank">Coursera</a></div>
+    <div class="resource-card"><h3>Когнитивная психология (ВШЭ)</h3><p>Русскоязычный курс на Stepik.</p><a class="btn" href="https://stepik.org/catalog?q=когнитивная+психология" target="_blank">Stepik</a></div>
+    <div class="resource-card"><h3>Learning How to Learn</h3><p>Курс про то, как учиться. Самый популярный на Coursera.</p><a class="btn" href="https://www.coursera.org/learn/learning-how-to-learn" target="_blank">Coursera</a></div>
   </section>
 
 </main>
@@ -176,7 +326,7 @@
 </nav>
 
 <script>
-  // переключение вкладок
+  // вкладки
   const tabs=document.querySelectorAll('nav button');
   const screens=document.querySelectorAll('.screen');
   tabs.forEach(b=>b.addEventListener('click',()=>{
@@ -186,23 +336,63 @@
     document.getElementById(b.dataset.tab).classList.add('active');
     window.scrollTo(0,0);
   }));
-  // сохранение чекбоксов и заметок
+  // чекбоксы + XP + конфетти
   document.querySelectorAll('input[type=checkbox][data-key]').forEach(c=>{
     c.checked = localStorage.getItem('ck_'+c.dataset.key)==='1';
-    c.addEventListener('change',()=>localStorage.setItem('ck_'+c.dataset.key, c.checked?'1':'0'));
+    c.addEventListener('change',()=>{
+      localStorage.setItem('ck_'+c.dataset.key, c.checked?'1':'0');
+      if(c.checked){
+        const xp = parseInt(c.dataset.xp||5);
+        addXP(xp);
+        confetti();
+      }
+    });
   });
+  // textarea
   document.querySelectorAll('textarea[data-key]').forEach(t=>{
     t.value = localStorage.getItem('tx_'+t.dataset.key)||'';
     t.addEventListener('input',()=>localStorage.setItem('tx_'+t.dataset.key, t.value));
   });
-  // поиск терминов
+  // поиск
   const search=document.getElementById('search');
   if(search) search.addEventListener('input',()=>{
     const q=search.value.toLowerCase();
-    document.querySelectorAll('#terms .term').forEach(t=>{
+    document.querySelectorAll('#terms .term, details').forEach(t=>{
       t.style.display = t.textContent.toLowerCase().includes(q)?'':'none';
     });
   });
+  // XP система
+  let xp = parseInt(localStorage.getItem('xp')||0);
+  const lvlTitles = ['Новичок','Исследователь','Аналитик','Наблюдатель','Эксперт','Мастер','Гуру'];
+  function updateXP(){
+    const lvl = Math.floor(xp/100)+1;
+    const need = lvl*100;
+    const cur = xp % 100;
+    document.getElementById('lvl-num').textContent = lvl;
+    document.getElementById('lvl-title').textContent = lvlTitles[Math.min(lvl-1,lvlTitles.length-1)];
+    document.getElementById('xp-cur').textContent = cur;
+    document.getElementById('xp-need').textContent = need;
+    document.getElementById('xp-fill').style.width = (cur/need*100)+'%';
+    localStorage.setItem('xp', xp);
+  }
+  function addXP(n){ xp += n; updateXP(); }
+  updateXP();
+  // конфетти
+  function confetti(){
+    const colors = ['#6B7F6B','#C89B7B','#D4A574','#E8C4A0','#8FA88F'];
+    const emojis = ['🌸','✨','⭐','🌿','💫'];
+    for(let i=0;i<25;i++){
+      const el = document.createElement('div');
+      el.className='confetti';
+      el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      el.style.left = Math.random()*100+'vw';
+      el.style.fontSize = (Math.random()*16+10)+'px';
+      el.style.animationDuration = (Math.random()*1.5+1.5)+'s';
+      el.style.color = colors[Math.floor(Math.random()*colors.length)];
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(), 3000);
+    }
+  }
 </script>
 </body>
 </html>
